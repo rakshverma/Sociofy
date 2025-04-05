@@ -1,85 +1,188 @@
-# Sociofy
+Thanks! Here's your finalized and corrected `README.md` based on your updates:
 
-Sociofy is a full-stack social media platform that enables users to interact through personal chat, posts, comments, likes, visitor views for gold members, bot interactions, and chat rooms.
+- The **frontend is the root directory**.
+- **Flask is required** if the user wants to use the **chat room feature**.
+- Everything is structured for clarity and developer-friendliness.
 
-## Features
+---
 
-- **User Authentication:** Secure authentication using JWT.
-- **Personal Chat:** End-to-end encrypted messaging with deletion options.
-- **Post System:** Users can create posts with text, images, and videos.
-- **Like & Comment:** Engage with posts through likes and comments.
-- **Visitor Insights:** Gold members can see profile visitors.
-- **Bot Feature:** AI-based bot for FAQs and assistance.
-- **Chat Rooms:** Users can join public or private chat rooms.
-- **Admin Moderation:** Admins can ban users no frontend for admin but mark isbanned true in MONGO DB ATLAS to ban the user.
+### 📄 `README.md`
 
-## Tech Stack
+```md
+# 🌐 Sociofy
 
-### Backend:
+**Sociofy** is a full-stack social media platform that connects users through real-time chat, posts, comments, likes, AI bot interactions, and exclusive features for premium members.
 
-- Node.js with Express.js
-- Flask (Python) (optional for specific backend tasks)
-- MongoDB community server(Set it up for local host)
+---
+
+## 🚀 Features
+
+- 🔐 **User Authentication:** Secure JWT-based authentication.
+- 💬 **Personal Chat:** End-to-end encrypted DMs with delete functionality.
+- 📝 **Posts:** Share content via text, images, and videos.
+- ❤️ **Like & Comment:** Engage with posts in real-time.
+- 👁️ **Visitor Insights:** Gold members can view profile visitors.
+- 🧠 **AI Bot:** Built-in chatbot powered by `llama3:latest` via Ollama.
+- 🏠 **Chat Rooms:** Flask-powered real-time chat rooms (Python backend required).
+- ⚙️ **Admin Control:** Admins can ban users by setting `isbanned: true` in MongoDB (no admin panel yet).
+
+---
+
+## 🧰 Tech Stack
+
+### 🔙 Backend
+
+- Node.js + Express.js
+- Python + Flask (mandatory for chat room support)
+- MongoDB (local community server or Atlas)
 - JWT for authentication
+- Ollama (AI serving with LLaMA 3)
 
-### Frontend:
+### 🔝 Frontend
 
-- React.js (Vite for fast development)
-- Tailwind CSS for styling
+- React.js (Vite)
+- Tailwind CSS
 
-### Deployment:
-- Is ready to be deployed on vercel.
-- MongoDB Atlas for database hosting (optional)
+### ☁️ Deployment
 
-## Installation & Setup
+- Frontend deployable to **Vercel**
+- MongoDB Atlas support (optional for production)
 
-### Prerequisites
+---
 
-- Node.js (v16+ recommended)
-- Python (if using Django for backend features)
-- MongoDB (local or cloud instance)
-- MySQL (for relational data storage)
+## 🛠️ Installation & Setup
 
-### Steps
+### ✅ Prerequisites
 
-1. Install dependencies for backend:
+- Node.js (v16+)
+- Python 3.8+
+- MongoDB (local or Atlas)
+- [Ollama](https://ollama.com/download) (for AI bot)
+- Git
 
-   ```sh
-   cd Backend-Sociofy
+---
+
+### 🔧 Backend Setup
+
+1. **Clone the Repository**
+
+   ```bash
+   git clone https://github.com/yourusername/sociofy.git
+   cd sociofy/Backend-Sociofy
+   ```
+
+2. **Install Node Backend Dependencies**
+
+   ```bash
    npm install
    ```
 
-2. Set up environment variables in a `.env` file:
+3. **Create `.env` file**
 
    ```env
-   MONGO_URI=your_mongo_connection_string
+   MONGO_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret
    ```
 
-3. Start the backend server:
+4. **Start the Node.js Backend**
 
-   ```sh
+   ```bash
    node index.js
    ```
 
-4. Install dependencies for frontend:
+5. **Set Up Flask Backend (Required for Chat Rooms)**
 
-   ```sh
-   Current directory is frontend
+   ```bash
+   # Inside Backend-Sociofy
+   pip install -r requirements.txt
+   python server.py
+   ```
+
+---
+
+### 🌐 Frontend Setup (Root Directory)
+
+1. **Install Frontend Dependencies**
+
+   ```bash
    npm install
    ```
 
-5. Start the frontend server:
+2. **Start Frontend Server**
 
-   ```sh
+   ```bash
    npm run dev
    ```
 
-6. If using Flask for specific backend features, run:
+3. **Access the App**
 
-   ```sh
-   cd Backend-Sociofy
-   python server.js
+   Open [http://localhost:5173](http://localhost:5173)
+
+---
+
+### 🤖 AI Bot Setup with Ollama
+
+Sociofy integrates an AI bot using **LLaMA 3** served locally via **Ollama**.
+
+1. **Install Ollama**
+
+   Download and install from [https://ollama.com/download](https://ollama.com/download)
+
+2. **Pull LLaMA 3 Model**
+
+   ```bash
+   ollama pull llama3:latest
    ```
 
-7. Open `http://localhost:5173` in your browser.
+3. **Run the Model**
+
+   ```bash
+   ollama run llama3
+   ```
+
+   This will start the server at `http://localhost:11434`, which is used by the Flask server for bot queries.
+
+---
+
+### 🛠️ Fine-Tuning LLaMA 3 using Modelfile (Optional)
+
+1. **Create a `Modelfile`**
+
+   ```dockerfile
+   FROM llama3:latest
+
+   SYSTEM "You are Sociofy AI. Help users navigate the app and answer FAQs clearly."
+
+   TEMPLATE "User: {{ .Input }}\nAI:"
+   ```
+
+2. **Build Your Custom Model**
+
+   ```bash
+   ollama create sociofy-bot -f Modelfile
+   ```
+
+3. **Run It**
+
+   ```bash
+   ollama run sociofy-bot
+   ```
+
+Now your bot is personalized to Sociofy’s domain.
+
+---
+
+## 💡 Notes
+
+- Flask backend is **required** only if you want to use **chat room features** or **chatbot**.
+- Make sure MongoDB is running locally or hosted via Atlas.
+
+---
+
+## 📬 Contribution
+
+Pull requests and issues are welcome. Let’s improve Sociofy together!
+
+---
+
+
