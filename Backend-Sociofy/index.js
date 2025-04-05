@@ -46,6 +46,7 @@ const userSchema = new mongoose.Schema({
     friends: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     isGoldMember: { type: Boolean, default: false },
     goldMembershipExpiry: { type: Date, default: null },
+    isBanned: { type: Boolean, default: false },
 });
 
 const User = mongoose.model("User", userSchema);
@@ -241,8 +242,8 @@ app.post("/login", async (req, res) => {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
 
-        if (!user || !(await bcrypt.compare(password, user.password))) {
-            return res.status(400).json({ message: "Invalid credentials" });
+        if (!user || !(await bcrypt.compare(password, user.password))|| user.isBanned) {
+            return res.status(400).json({ message: "Invalid credentials/Banned" });
         }
 
         const token = jwt.sign(
