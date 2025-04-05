@@ -127,7 +127,7 @@ Sociofy integrates an AI bot using **LLaMA 3** served locally via **Ollama**.
 3. **Run the Model**
 
    ```bash
-   ollama run llama3
+   ollama run llama3.2:latest
    ```
 
    This will start the server at `http://localhost:11434`, which is used by the Flask server for bot queries.
