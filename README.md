@@ -12,7 +12,7 @@
 - 📝 **Posts:** Share content via text, images, and videos.
 - ❤️ **Like & Comment:** Engage with posts in real-time.
 - 👁️ **Visitor Insights:** Gold members can view profile visitors.
-- 🧠 **AI Bot:** Built-in chatbot powered by `llama3:latest` via Ollama.
+- 🧠 **AI Bot:** Built-in chatbot powered by `llama3.2:latest` via Ollama.
 - 🏠 **Chat Rooms:** Flask-powered real-time chat rooms (Python backend required).
 - ⚙️ **Admin Control:** Admins can ban users by setting `isbanned: true` in MongoDB (no admin panel yet).
 
@@ -121,7 +121,7 @@ Sociofy integrates an AI bot using **LLaMA 3** served locally via **Ollama**.
 2. **Pull LLaMA 3 Model**
 
    ```bash
-   ollama pull llama3:latest
+   ollama pull llama3.2:latest
    ```
 
 3. **Run the Model**
@@ -139,7 +139,7 @@ Sociofy integrates an AI bot using **LLaMA 3** served locally via **Ollama**.
 1. **Create a `Modelfile`**
 
    ```dockerfile
-   FROM llama3:latest
+   FROM llama3.2:latest
 
    SYSTEM "You are Sociofy AI. Help users navigate the app and answer FAQs clearly."
 
