@@ -1,5 +1,14 @@
+Thanks! Here's your finalized and corrected `README.md` based on your updates:
 
+- The **frontend is the root directory**.
+- **Flask is required** if the user wants to use the **chat room feature**.
+- Everything is structured for clarity and developer-friendliness.
 
+---
+
+### 📄 `README.md`
+
+```md
 # 🌐 Sociofy
 
 **Sociofy** is a full-stack social media platform that connects users through real-time chat, posts, comments, likes, AI bot interactions, and exclusive features for premium members.
@@ -150,13 +159,13 @@ Sociofy integrates an AI bot using **LLaMA 3** served locally via **Ollama**.
 2. **Build Your Custom Model**
 
    ```bash
-   ollama create sociofy-bot -f Modelfile
+   ollama create sociofybot -f Modelfile
    ```
 
 3. **Run It**
 
    ```bash
-   ollama run sociofy-bot
+   ollama run sociofybot
    ```
 
 Now your bot is personalized to Sociofy’s domain.
