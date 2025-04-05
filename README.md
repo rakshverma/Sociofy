@@ -11,15 +11,15 @@ Sociofy is a full-stack social media platform that enables users to interact thr
 - **Visitor Insights:** Gold members can see profile visitors.
 - **Bot Feature:** AI-based bot for FAQs and assistance.
 - **Chat Rooms:** Users can join public or private chat rooms.
-- **Admin Moderation:** Admins can warn or ban users violating platform policies.
+- **Admin Moderation:** Admins can ban users no frontend for admin but mark isbanned true in MONGO DB ATLAS to ban the user.
 
 ## Tech Stack
 
 ### Backend:
 
 - Node.js with Express.js
-- Django (Python) (optional for specific backend tasks)
-- MongoDB & MySQL for database storage
+- Flask (Python) (optional for specific backend tasks)
+- MongoDB community server(Set it up for local host)
 - JWT for authentication
 
 ### Frontend:
@@ -28,8 +28,7 @@ Sociofy is a full-stack social media platform that enables users to interact thr
 - Tailwind CSS for styling
 
 ### Deployment:
-
-- Google Cloud / Oracle Cloud
+- Is ready to be deployed on vercel.
 - MongoDB Atlas for database hosting (optional)
 
 ## Installation & Setup
@@ -46,7 +45,7 @@ Sociofy is a full-stack social media platform that enables users to interact thr
 1. Install dependencies for backend:
 
    ```sh
-   cd backend
+   cd Backend-Sociofy
    npm install
    ```
 
@@ -54,7 +53,6 @@ Sociofy is a full-stack social media platform that enables users to interact thr
 
    ```env
    MONGO_URI=your_mongo_connection_string
-   MYSQL_URI=your_mysql_connection_string
    JWT_SECRET=your_jwt_secret
    ```
 
@@ -67,7 +65,7 @@ Sociofy is a full-stack social media platform that enables users to interact thr
 4. Install dependencies for frontend:
 
    ```sh
-   cd ../frontend
+   Current directory is frontend
    npm install
    ```
 
@@ -77,14 +75,11 @@ Sociofy is a full-stack social media platform that enables users to interact thr
    npm run dev
    ```
 
-6. If using Django for specific backend features, run:
+6. If using Flask for specific backend features, run:
 
    ```sh
+   cd Backend-Sociofy
    python server.js
    ```
 
 7. Open `http://localhost:5173` in your browser.
-
-## Contributing
-
-Contributions are welcome! Feel free to fork the repo and submit a pull request.
