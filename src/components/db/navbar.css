@@ -1,0 +1,95 @@
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f4f4f9;
+}
+
+.App {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #18d5f2;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  gap: 20px;
+  font-size: 24px;
+  color: white;
+}
+
+.icon {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.icon:hover {
+  color: black;
+}
+
+.navbar-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar {
+  width: 500px;
+  padding: 8px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  margin-top:1vh;
+}
+
+.search-bar:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.search-icon {
+  margin-left: 4px;
+  padding-top: 7px;
+  height: 6vh;
+  color: #6f6c6c;
+  cursor: pointer;
+}
+.search-icon:hover {
+  color: black;
+}
+
+.navbar-right {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar-right .icon {
+  font-size: 22px;
+  cursor: pointer;
+  color: white;
+}
+
+.navbar-right .icon:hover {
+  color: black;
+}
+#ico{
+  color: white;
+  cursor: pointer;
+  font-size: 24px;
+}
+#ico:hover{
+  color: black;
+}
