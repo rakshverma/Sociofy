@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Add this import
+import { useNavigate } from "react-router-dom";
 import "boxicons/css/boxicons.min.css";
+
 function Body() {
-    const navigate = useNavigate(); // Initialize the navigate function
+  const navigate = useNavigate();
   const [selectedFile, setSelectedFile] = useState(null);
   const [preview, setPreview] = useState(null);
   const [uploadedPosts, setUploadedPosts] = useState([]);
@@ -17,14 +18,13 @@ function Body() {
   const [showCommentsForPost, setShowCommentsForPost] = useState(null);
   const [friends, setFriends] = useState([]);
 
-
   const email = localStorage.getItem("email") || "test_email";
 
   useEffect(() => {
     if (email) {
       fetchUserProfile();
       fetchPosts();
-      fetchFriends(); // Add this line
+      fetchFriends();
     }
   
     const handleKeyDown = (event) => {
@@ -59,9 +59,9 @@ function Body() {
       setLoading(false);
     }
   };
-  // Add this function to handle navigation to a friend's profile
+
   const navigateToFriendProfile = (friendEmail) => {
-    navigate(`/user-profile/${friendEmail}`); // Use friendEmail, not email
+    navigate(`/user-profile/${friendEmail}`);
   };
 
   const handleFileChange = (event) => {
@@ -118,12 +118,12 @@ function Body() {
       setUploadError("Failed to upload post. Try again.");
     }
   };
+
   const getUserName = (userId) => {
-    // Find the post with matching userId to get the userName
-    // This assumes the userId in comments matches the userId in posts
     const post = uploadedPosts.find(post => post.userId.toString() === userId.toString());
     return post ? post.userName : "Unknown User";
   };
+
   const handleLike = async (postId) => {
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/like/${postId}`, { email });
@@ -139,7 +139,6 @@ function Body() {
     
     try {
       await axios.post(`${import.meta.env.VITE_API_URL}/comment/${postId}`, { email, comment });
-      // Clear the comment input for this specific post
       setComments({
         ...comments,
         [postId]: ""
@@ -159,13 +158,13 @@ function Body() {
     }
   };
 
-  // Get the most recent comments (sorted by createdAt)
   const getRecentComments = (comments, count) => {
     if (!comments || !comments.length) return [];
     return [...comments]
       .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
       .slice(0, count);
   };
+
   const fetchFriends = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_API_URL}/friends/${email}`);
@@ -176,59 +175,57 @@ function Body() {
   };
   
   return (
-    <div  className="pt-10 flex min-h-screen bg-gray-100">
-<aside className="w-72 bg-white shadow-lg p-6">
-  <div className="text-center">
-    {userProfile?.profilePicture ? (
-      <img
-        src={`data:image/png;base64,${userProfile.profilePicture}`}
-        alt="Profile"
-        className="w-24 h-24 mx-auto rounded-full border-4 border-blue-500 cursor-pointer"
-        onClick={() => setModalImage(`data:image/png;base64,${userProfile.profilePicture}`)}
-      />
-    ) : (
-      <i className="bx bx-user text-7xl text-gray-400"></i>
-    )}
-    <h2 className="mt-3 text-xl font-semibold">{userProfile?.name || "User"}</h2>
-  </div>
-  
-  {/* Add Friends Section Here */}
-  <div className="mt-6 pt-4 border-t border-gray-200">
-    <h3 className="font-semibold text-gray-700 flex items-center">
-      <i className="bx bx-group mr-2 text-blue-500"></i> Friends
-    </h3>
-    
-    <div className="mt-3 max-h-64 overflow-y-auto">
-  {friends.length > 0 ? (
-    friends.map((friend) => (
-      <div 
-        key={friend._id} 
-        className="flex items-center py-2 border-b border-gray-100 cursor-pointer hover:bg-gray-50"
-        onClick={() => navigateToFriendProfile(friend.email)}
-      >
-        {friend.profilePicture ? (
-          <img
-            src={`data:image/png;base64,${friend.profilePicture}`}
-            alt={friend.name}
-            className="w-10 h-10 rounded-full object-cover mr-3"
-          />
-        ) : (
-          <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
-            <i className="bx bx-user text-gray-400"></i>
-          </div>
-        )}
-        <div>
-          <p className="font-medium text-gray-800">{friend.name}</p>
+    <div className="pt-16 mt-4 flex min-h-screen bg-gray-100">
+      <aside className="w-72 bg-white shadow-lg p-6">
+        <div className="text-center">
+          {userProfile?.profilePicture ? (
+            <img
+              src={`data:image/png;base64,${userProfile.profilePicture}`}
+              alt="Profile"
+              className="w-24 h-24 mx-auto rounded-full border-4 border-blue-500 cursor-pointer"
+              onClick={() => setModalImage(`data:image/png;base64,${userProfile.profilePicture}`)}
+            />
+          ) : (
+            <i className="bx bx-user text-7xl text-gray-400"></i>
+          )}
+          <h2 className="mt-3 text-xl font-semibold">{userProfile?.name || "User"}</h2>
         </div>
-      </div>
-    ))
-  ) : (
-    <p className="text-gray-500 text-sm py-2">No friends yet</p>
-  )}
-</div>
-  </div>
-</aside>
-
+        
+        <div className="mt-6 pt-4 border-t border-gray-200">
+          <h3 className="font-semibold text-gray-700 flex items-center">
+            <i className="bx bx-group mr-2 text-blue-500"></i> Friends
+          </h3>
+          
+          <div className="mt-3 max-h-64 overflow-y-auto">
+            {friends.length > 0 ? (
+              friends.map((friend) => (
+                <div 
+                  key={friend._id} 
+                  className="flex items-center py-2 border-b border-gray-100 cursor-pointer hover:bg-gray-50"
+                  onClick={() => navigateToFriendProfile(friend.email)}
+                >
+                  {friend.profilePicture ? (
+                    <img
+                      src={`data:image/png;base64,${friend.profilePicture}`}
+                      alt={friend.name}
+                      className="w-10 h-10 rounded-full object-cover mr-3"
+                    />
+                  ) : (
+                    <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
+                      <i className="bx bx-user text-gray-400"></i>
+                    </div>
+                  )}
+                  <div>
+                    <p className="font-medium text-gray-800">{friend.name}</p>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-gray-500 text-sm py-2">No friends yet</p>
+            )}
+          </div>
+        </div>
+      </aside>
 
       <main className="flex-1 p-6">
         <form className="bg-white p-6 rounded-lg shadow-lg" onSubmit={handleUpload}>
@@ -270,7 +267,6 @@ function Body() {
                 />
               )}
               
-              {/* Comments section */}
               <div className="mt-2">
                 {post.comments && post.comments.length > 0 && (
                   <div className="mt-2">
@@ -281,13 +277,12 @@ function Body() {
                       View all {post.comments.length} comments
                     </div>
                     
-                    {/* Display top 2 recent comments */}
                     <div className="mt-1 space-y-1">
-                    {getRecentComments(post.comments, 2).map((comment, index) => (
-  <div key={index} className="text-sm text-gray-700 bg-gray-50 p-2 rounded">
-    <strong>{getUserName(comment.userId)}</strong>: {comment.commentText}
-  </div>
-))}
+                      {getRecentComments(post.comments, 2).map((comment, index) => (
+                        <div key={index} className="text-sm text-gray-700 bg-gray-50 p-2 rounded">
+                          <strong>{getUserName(comment.userId)}</strong>: {comment.commentText}
+                        </div>
+                      ))}
                     </div>
                   </div>
                 )}
@@ -328,7 +323,7 @@ function Body() {
               src={modalImage} 
               alt="Enlarged view" 
               className="max-w-full max-h-[90vh] object-contain"
-              onClick={(e) => e.stopPropagation()} // Prevent closing when clicking on the image itself
+              onClick={(e) => e.stopPropagation()}
             />
             <button 
               className="absolute top-4 right-4 text-white text-2xl"
@@ -361,22 +356,22 @@ function Body() {
             </div>
             
             <div className="overflow-y-auto max-h-[60vh] pr-2">
-            {uploadedPosts.find(post => post._id === showCommentsForPost)?.comments
-  .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-  .map((comment, index) => (
-    <div key={index} className="mb-3 p-3 bg-gray-50 rounded-lg">
-      <div className="flex items-start">
-        <div className="flex-1">
-          <p className="font-semibold">{getUserName(comment.userId)}</p>
-          <p className="text-gray-700">{comment.commentText}</p>
-          <p className="text-xs text-gray-500 mt-1">
-            {new Date(comment.createdAt).toLocaleString()}
-          </p>
-        </div>
-      </div>
-    </div>
-  ))
-}
+              {uploadedPosts.find(post => post._id === showCommentsForPost)?.comments
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((comment, index) => (
+                  <div key={index} className="mb-3 p-3 bg-gray-50 rounded-lg">
+                    <div className="flex items-start">
+                      <div className="flex-1">
+                        <p className="font-semibold">{getUserName(comment.userId)}</p>
+                        <p className="text-gray-700">{comment.commentText}</p>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {new Date(comment.createdAt).toLocaleString()}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
             </div>
             
             <div className="mt-4">
@@ -399,8 +394,6 @@ function Body() {
           </div>
         </div>
       )}
-      <br/>
-      
     </div>
   );
 }
